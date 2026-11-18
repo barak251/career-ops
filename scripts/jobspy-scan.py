@@ -8,7 +8,7 @@ descriptions) go to data/jobspy-latest.json for triage.
 
 Run:  ~/dev/career-ops/.venv-jobspy/bin/python ~/dev/career-ops/scripts/jobspy-scan.py [--hours 168] [--per-site 25]
 """
-import argparse, datetime as dt, json, re, sys
+import argparse, datetime as dt, json, os, re, sys
 from pathlib import Path
 
 import yaml
@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PIPELINE = ROOT / "data" / "pipeline.md"
 HISTORY = ROOT / "data" / "scan-history.tsv"
 LATEST = ROOT / "data" / "jobspy-latest.json"
-APPLIED_LOG = Path("/Users/barak/Documents/applications/APPLIED-LOG.md")
+APPLIED_LOG = Path(os.environ.get("CAREER_OPS_APPLIED_LOG", Path.home() / "Documents/applications/APPLIED-LOG.md")).expanduser()  # override for a log kept elsewhere
 
 TERMS = ["Head of Product", "VP Product", "Director of Product", "Product Director", "Chief Product Officer", "Group Product Manager",
          "Senior Product Manager", "Head of Business Development", "Business Development Manager", "Strategic Partnerships", "Head of Partnerships"]  # 2026-11-13 Barak: + Senior PM, BizDev, Partnerships
