@@ -310,3 +310,5 @@ data/interview-prep/
 .next/
 web/.next/
 web/out/
+__pycache__/
+*.pyc
